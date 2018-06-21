@@ -35,7 +35,7 @@ public class MonayExceptionHandler extends ResponseEntityExceptionHandler {
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 
 		String menssagemUsuario = messageSource.getMessage("menssagem.invalida", null, LocaleContextHolder.getLocale());
-		String menssagemDesenvolvedor = ex.getCause().toString();
+		String menssagemDesenvolvedor = ex.getCause() != null ? ex.getCause().toString() : ex.toString(); 
 		List<Erro> erros = Arrays.asList(new Erro(menssagemUsuario, menssagemDesenvolvedor));
 		return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
 	}
